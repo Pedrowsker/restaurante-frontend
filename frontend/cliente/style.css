@@ -1,0 +1,39 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #111;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background: #222;
+  padding: 30px;
+  border-radius: 10px;
+  width: 300px;
+  text-align: center;
+}
+
+#status {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.status {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.status.Pendente {
+  color: #aaa;
+}
+
+.status.Em-preparo {
+  color: #ffcc00;
+}
+
+.status.Pronto {
+  color: #00ff88;
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Cardápio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>🍔 Cardápio</h1>
+
+  <div class="produtos">
+    <div class="produto">
+      <span>Hambúrguer</span>
+      <button onclick="adicionar('Hambúrguer')">Adicionar</button>
+    </div>
+
+    <div class="produto">
+      <span>Pizza</span>
+      <button onclick="adicionar('Pizza')">Adicionar</button>
+    </div>
+
+    <div class="produto">
+      <span>Refrigerante</span>
+      <button onclick="adicionar('Refrigerante')">Adicionar</button>
+    </div>
+  </div>
+
+  <h2>🛒 Carrinho</h2>
+  <ul id="carrinho"></ul>
+
+  <input type="text" id="nomeCliente" placeholder="Seu nome">
+
+  <button onclick="enviarPedido()">Enviar Pedido</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
