@@ -1,7 +1,7 @@
 const params = new URLSearchParams(window.location.search);
 const pedidoId = params.get('id');
 
-const API_URL = 'https://SEU_BACKEND.onrender.com';
+const API_URL = 'https://restaurante-backend-tnnb.onrender.com';
 
 const clienteSpan = document.getElementById('cliente');
 const statusSpan = document.getElementById('status');

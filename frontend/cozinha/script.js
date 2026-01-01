@@ -1,4 +1,4 @@
-const API_URL = 'https://SEU_BACKEND.onrender.com';
+const API_URL = 'https://restaurante-backend-tnnb.onrender.com';
 const pedidosDiv = document.getElementById('pedidos');
 
 async function carregarPedidos() {

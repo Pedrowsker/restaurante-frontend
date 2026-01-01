@@ -1,59 +1,67 @@
-let carrinho = [];
+const API_URL = 'https://restaurante-backend-tnnb.onrender.com';
+const pedidosDiv = document.getElementById('pedidos');
 
-const API_URL = 'https://SEU_BACKEND.onrender.com';
-
-function adicionar(produto) {
-  const item = carrinho.find(i => i.produto === produto);
-
-  if (item) {
-    item.quantidade++;
-  } else {
-    carrinho.push({ produto, quantidade: 1 });
-  }
-
-  renderCarrinho();
-}
-
-function renderCarrinho() {
-  const ul = document.getElementById('carrinho');
-  ul.innerHTML = '';
-
-  carrinho.forEach(item => {
-    const li = document.createElement('li');
-    li.innerText = `${item.produto} - ${item.quantidade}`;
-    ul.appendChild(li);
-  });
-}
-
-async function enviarPedido() {
-  const nomeCliente = document.getElementById('nomeCliente').value;
-
-  if (!nomeCliente || carrinho.length === 0) {
-    alert('Preencha seu nome e escolha ao menos um item');
-    return;
-  }
-
+async function carregarPedidos() {
   try {
-    const resposta = await fetch(`${API_URL}/pedido`, {
-      method: 'POST',
+    const response = await fetch(`${API_URL}/pedidos`);
+    const pedidos = await response.json();
+
+    pedidosDiv.innerHTML = '';
+
+    pedidos
+      .filter(pedido => pedido.status !== 'Pronto')
+      .forEach(pedido => {
+
+        const pedidoDiv = document.createElement('div');
+        pedidoDiv.className = 'pedido';
+
+        let html = `
+          <h2>Cliente: ${pedido.nome_cliente}</h2>
+          <p>Status: <strong>${pedido.status}</strong></p>
+          <div class="itens">
+        `;
+
+        pedido.itens.forEach(item => {
+          html += `<div class="item">• ${item.quantidade}x ${item.produto}</div>`;
+        });
+
+        html += `
+          </div>
+          <div class="acoes">
+            <button onclick="alterarStatus(${pedido.id}, 'Em preparo')">Em preparo</button>
+            <button onclick="alterarStatus(${pedido.id}, 'Pronto')">Pronto</button>
+          </div>
+        `;
+
+        pedidoDiv.innerHTML = html;
+        pedidosDiv.appendChild(pedidoDiv);
+      });
+
+  } catch (error) {
+    console.error('Erro ao carregar pedidos:', error);
+  }
+}
+
+async function alterarStatus(id, status) {
+  try {
+    const response = await fetch(`${API_URL}/pedido/${id}/status`, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        nome_cliente: nomeCliente,
-        itens: carrinho
-      })
+      body: JSON.stringify({ status })
     });
 
-    const dados = await resposta.json();
-
-    if (!resposta.ok) {
-      throw new Error(dados.erro || 'Erro');
+    if (!response.ok) {
+      throw new Error('Erro ao atualizar status');
     }
 
-    window.location.href = `/cliente/?id=${dados.pedido_id}`;
+    carregarPedidos();
 
   } catch (error) {
-    alert('Erro ao enviar pedido');
+    console.error(error);
   }
 }
+
+carregarPedidos();
+setInterval(carregarPedidos, 5000);
