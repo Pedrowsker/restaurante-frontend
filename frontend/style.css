@@ -27,9 +27,8 @@ body > * {
 .app {
   width: 100%;
   height: 100%;
-  max-width: 520px;     /* limite só em telas grandes */
-  background: #f2f2f2;
-
+  max-width: 920px;     /* limite só em telas grandes */
+  background: #f2f2f200;
   display: flex;
   flex-direction: column;
   justify-content: center; /* CENTRALIZA VERTICAL */
