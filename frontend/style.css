@@ -12,40 +12,21 @@ html, body {
 body {
   font-family: Arial, sans-serif;
   background: #f2f2f2;
-
-  /* CENTRO REAL */
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
-/* APP CONTAINER (TELA CHEIA) */
-body > * {
-  width: 100%;
-}
-
+/* APP */
 .app {
-  width: 100%;
-  height: 100%;
-  max-width: 920px;     /* limite só em telas grandes */
-  background: #f2f2f200;
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* CENTRALIZA VERTICAL */
-  padding: 24px;
+  min-height: 100vh;
+  padding: 24px 20px 180px;
+  max-width: 520px;
+  margin: 0 auto;
 }
 
-/* TÍTULOS */
+/* TÍTULO */
 h1 {
   text-align: center;
   font-size: 40px;
   margin-bottom: 32px;
-}
-
-h2 {
-  text-align: center;
-  font-size: 32px;
-  margin: 50px 0 24px;
 }
 
 /* PRODUTOS */
@@ -55,32 +36,29 @@ h2 {
   gap: 24px;
 }
 
-/* CARD DO PRODUTO */
 .produto {
-  background: #ffffff;
-  padding: 26px;
+  background: #fff;
+  padding: 28px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-radius: 22px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  border-radius: 24px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.233);
 }
 
-/* NOME */
 .produto span {
-  font-size: 26px;
-  font-weight: 700;
+  font-size: 28px;
+  font-weight: bold;
 }
 
-/* BOTÃO */
 .produto button {
-  padding: 18px 28px;
-  font-size: 20px;
+  padding: 20px 32px;
+  font-size: 22px;
   font-weight: bold;
   background: #ffbb00;
   color: #000;
   border: none;
-  border-radius: 18px;
+  border-radius: 20px;
   cursor: pointer;
 }
 
@@ -89,63 +67,66 @@ h2 {
 }
 
 /* CARRINHO */
-#carrinho {
-  list-style: none;
-  margin-top: 40px;
+h2 {
+  font-size: 34px;
+  text-align: center;
+  margin: 56px 0 28px;
 }
 
-/* ITEM CARRINHO */
+#carrinho {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
 #carrinho li {
-  background: #ffffff;
-  padding: 22px;
-  border-radius: 20px;
-  margin-bottom: 18px;
-  font-size: 24px;
+  background: #fff;
+  padding: 26px;
+  border-radius: 22px;
+  font-size: 26px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.12);
 }
 
-/* INPUT NOME */
-#nomeCliente {
-  margin-top: 50px;
-  padding: 24px;
-  font-size: 24px;
-  border-radius: 22px;
-  border: 2px solid #ddd;
+/* RODAPÉ FIXO */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
   width: 100%;
+  background: #ffffff;
+  padding: 20px;
+  box-shadow: 0 -8px 30px rgba(0,0,0,0.2);
 }
 
-#nomeCliente:focus {
-  border-color: #ffbb00;
+.footer-inner {
+  max-width: 520px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#nomeCliente {
+  width: 100%;
+  padding: 26px;
+  font-size: 26px;
+  border-radius: 22px;
+  border: 2px solid #ccc;
 }
 
 .btn-enviar {
-  margin-top: 20px;
-  padding: 26px;
-  font-size: 24px;
-  font-weight: bold;
   width: 100%;
+  padding: 28px;
+  font-size: 26px;
+  font-weight: bold;
   background: #00c77a;
   color: #000;
   border: none;
-  border-radius: 22px;
+  border-radius: 24px;
   cursor: pointer;
 }
 
 .btn-enviar:active {
   transform: scale(0.96);
-}
-
-
-/* REMOVE ESPAÇOS ESTRANHOS EM TELAS GRANDES */
-@media (min-width: 600px) {
-  body {
-    background: #ddd;
-  }
-
-  .app {
-    border-radius: 26px;
-    height: auto;
-    min-height: 95vh;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
-  }
 }

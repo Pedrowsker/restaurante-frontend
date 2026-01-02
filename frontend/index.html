@@ -7,39 +7,52 @@
 </head>
 <body>
 
-<div class="app">
+  <div class="app">
+    <h1>🍔 Cardápio</h1>
 
-  <h1>🍔 Cardápio</h1>
+    <div class="produtos">
+      <div class="produto">
+        <span>Hambúrguer</span>
+        <button onclick="adicionar('Hambúrguer')">Adicionar</button>
+      </div>
 
-  <div class="produtos">
-    <div class="produto">
-      <span>Hambúrguer</span>
-      <button onclick="adicionar('Hambúrguer')">Adicionar</button>
+      <div class="produto">
+        <span>Pizza</span>
+        <button onclick="adicionar('Pizza')">Adicionar</button>
+      </div>
+
+      <div class="produto">
+        <span>Refrigerante</span>
+        <button onclick="adicionar('Refrigerante')">Adicionar</button>
+      </div>
+
+      <div class="produto">
+        <span>Batata Frita</span>
+        <button onclick="adicionar('Batata Frita')">Adicionar</button>
+      </div>
+
+      <div class="produto">
+        <span>Milkshake</span>
+        <button onclick="adicionar('Milkshake')">Adicionar</button>
+      </div>
+
+      <div class="produto">
+        <span>Hot Dog</span>
+        <button onclick="adicionar('Hot Dog')">Adicionar</button>
+      </div>
     </div>
 
-    <div class="produto">
-      <span>Pizza</span>
-      <button onclick="adicionar('Pizza')">Adicionar</button>
-    </div>
+    <h2>🛒 Carrinho</h2>
+    <ul id="carrinho"></ul>
+  </div>
 
-    <div class="produto">
-      <span>Refrigerante</span>
-      <button onclick="adicionar('Refrigerante')">Adicionar</button>
+  <div class="footer">
+    <div class="footer-inner">
+      <input type="text" id="nomeCliente" placeholder="Digite seu nome">
+      <button class="btn-enviar" onclick="enviarPedido()">ENVIAR PEDIDO</button>
     </div>
   </div>
 
-  <h2>🛒 Carrinho</h2>
-  <ul id="carrinho"></ul>
-
-  <input type="text" id="nomeCliente" placeholder="Seu nome">
-
-  <button class="btn-enviar" onclick="enviarPedido()">Enviar Pedido</button>
-
-
-</div>
-
   <script src="script.js"></script>
-
-
 </body>
 </html>
