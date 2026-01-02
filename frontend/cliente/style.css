@@ -12,52 +12,58 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 16px; /* evita grudar nas bordas no celular */
+  padding: 12px;
 }
 
-/* Container principal */
+/* CONTAINER – GRANDE, ALTO E CENTRAL */
 .container {
   width: 100%;
-  max-width: 420px;
+  max-width: 580px;        /* MAIS LARGO */
+  min-height: 50vh;        /* MUITO MAIS ALTO */
   background: #1f1f1f;
-  padding: 28px 22px;
-  border-radius: 18px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  padding: 32px 24px;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* CENTRALIZA VERTICAL */
+  align-items: center;     /* CENTRALIZA HORIZONTAL */
   text-align: center;
 }
 
-/* Título */
+/* TÍTULO */
 .container h1 {
-  font-size: clamp(22px, 5vw, 28px);
-  margin-bottom: 20px;
+  font-size: 32px;         /* GRANDE */
+  margin-bottom: 24px;
   line-height: 1.3;
 }
 
-/* Informações do pedido */
+/* TEXTOS GERAIS */
 .container p {
-  font-size: clamp(16px, 4.5vw, 18px);
-  margin-bottom: 10px;
-  line-height: 1.5;
+  font-size: 22px;         /* MUITO LEGÍVEL */
+  margin-bottom: 14px;
+  line-height: 1.6;
 }
 
-/* Nome do cliente */
+/* NOME DO CLIENTE */
 #cliente {
+  font-size: 24px;
   font-weight: bold;
-  font-size: clamp(17px, 5vw, 19px);
+  margin-bottom: 10px;
 }
 
-/* Status */
+/* STATUS */
 .status {
-  display: inline-block;
-  margin-top: 14px;
-  padding: 10px 18px;
-  border-radius: 22px;
-  font-size: clamp(15px, 4.5vw, 17px);
+  margin-top: 20px;
+  padding: 16px 26px;
+  border-radius: 28px;
+  font-size: 20px;
   font-weight: bold;
   text-transform: uppercase;
 }
 
-/* Estados */
+/* ESTADOS */
 .status.Pendente {
   background: #444;
   color: #ccc;
@@ -73,45 +79,55 @@ body {
   color: #000;
 }
 
-/* Lista de itens */
+/* LISTA DE ITENS */
 #itens {
-  margin-top: 24px;
-  text-align: left;
+  width: 100%;
+  margin-top: 30px;
 }
 
 #itens div {
   background: #2a2a2a;
-  padding: 14px 16px;
-  border-radius: 12px;
-  margin-bottom: 10px;
-  font-size: clamp(15px, 4.5vw, 17px);
-  line-height: 1.4;
+  padding: 18px 20px;
+  border-radius: 14px;
+  margin-bottom: 14px;
+  font-size: 20px;
+  text-align: center; /* CENTRALIZADO */
 }
 
-/* Mensagem de pedido pronto */
+/* MENSAGEM DE PRONTO */
 #mensagem-pronto {
-  margin-top: 24px;
-  padding: 18px;
+  margin-top: 30px;
+  padding: 22px;
   background: #00c77a;
   color: #000;
-  border-radius: 14px;
+  border-radius: 16px;
+  font-size: 22px;
   font-weight: bold;
-  font-size: clamp(16px, 5vw, 18px);
   display: none;
   animation: pulse 1.5s infinite;
-  text-align: center;
+  width: 100%;
 }
 
-/* Animação leve */
+/* ANIMAÇÃO */
 @keyframes pulse {
   0% { transform: scale(1); }
-  50% { transform: scale(1.04); }
+  50% { transform: scale(1.05); }
   100% { transform: scale(1); }
 }
 
-/* Ajustes extras para telas muito pequenas */
+/* AJUSTE EXTRA PARA CELULARES MUITO PEQUENOS */
 @media (max-width: 360px) {
   .container {
-    padding: 24px 18px;
+    min-height: 95vh;
+    padding: 28px 20px;
+  }
+
+  .container h1 {
+    font-size: 28px;
+  }
+
+  .container p,
+  #itens div {
+    font-size: 20px;
   }
 }
