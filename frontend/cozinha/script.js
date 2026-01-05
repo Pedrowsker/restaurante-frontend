@@ -61,5 +61,13 @@ async function alterarStatus(id, status) {
   carregarPedidos();
 }
 
+async function limparPedidos() {
+  if (!confirm('Deseja apagar TODOS os pedidos?')) return;
+
+  await fetch(`${API_URL}/pedidos`, { method: 'DELETE' });
+  carregarPedidos();
+}
+
+
 carregarPedidos();
 setInterval(carregarPedidos, 5000);
