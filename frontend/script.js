@@ -9,7 +9,8 @@ function conferirPedido() {
   if (!codigo) return;
 
   // 🔴 IMPORTANTE: redireciona para o ARQUIVO HTML
-  window.location.href = `/cliente.html?codigo=${codigo}`;
+  window.location.href = `/cliente/?codigo=${codigo}`;
+
 }
 
 /* Adicionar item ao carrinho */
@@ -63,7 +64,8 @@ async function enviarPedido() {
     }
 
     // 🔴 IMPORTANTE: redireciona para o ARQUIVO HTML
-    window.location.href = `/cliente.html?id=${dados.pedido_id}`;
+    window.location.href = `/cliente/?id=${dados.pedido_id}`;
+
 
   } catch (error) {
     alert('Erro ao enviar pedido');
