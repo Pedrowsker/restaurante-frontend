@@ -13,32 +13,40 @@ const btnCopiar = document.getElementById('copiar-codigo');
 
 async function carregarPedido() {
   try {
-    let url;
+    let url = '';
 
+    // 🔹 Decide qual rota usar
     if (pedidoId) {
       url = `${API_URL}/pedido/${pedidoId}`;
     } else if (codigo) {
       url = `${API_URL}/pedido/codigo/${codigo}`;
     } else {
+      console.error('Nenhum ID ou código informado');
       return;
     }
 
     const response = await fetch(url);
-    const pedido = await response.json();
 
     if (!response.ok) {
-      throw new Error(pedido.erro || 'Pedido não encontrado');
+      throw new Error('Pedido não encontrado');
     }
 
+    const pedido = await response.json();
+
+    // Nome do cliente
     clienteSpan.innerText = pedido.nome_cliente;
 
+    // Status
     statusSpan.innerText = pedido.status;
     statusSpan.className = `status ${pedido.status.replace(' ', '-')}`;
 
+    // Mensagem de pronto
     mensagemPronto.style.display = pedido.status === 'Pronto' ? 'block' : 'none';
 
+    // Código do pedido
     codigoSpan.innerText = pedido.codigo;
 
+    // Itens
     itensDiv.innerHTML = '';
     pedido.itens.forEach(item => {
       const div = document.createElement('div');
@@ -51,7 +59,7 @@ async function carregarPedido() {
   }
 }
 
-// copiar código
+// 🔹 Copiar código do pedido
 btnCopiar.addEventListener('click', () => {
   navigator.clipboard.writeText(codigoSpan.innerText);
   btnCopiar.innerText = 'Copiado!';
@@ -60,5 +68,6 @@ btnCopiar.addEventListener('click', () => {
   }, 2000);
 });
 
+// Primeira carga + atualização automática
 carregarPedido();
 setInterval(carregarPedido, 3000);
