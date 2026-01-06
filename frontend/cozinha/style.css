@@ -6,8 +6,9 @@ body {
   padding: 20px;
 }
 
-h1, h2 {
+h1 {
   text-align: center;
+  margin-bottom: 30px;
 }
 
 .pedido {
@@ -15,43 +16,41 @@ h1, h2 {
   border: 2px solid #333;
   border-radius: 8px;
   padding: 15px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
-.pedido.pronto {
-  opacity: 0.7;
+.pedido h2 {
+  margin: 0 0 10px 0;
 }
 
 .itens {
-  margin: 10px 0;
+  margin-left: 15px;
 }
 
 .item {
   margin-bottom: 5px;
 }
 
-.acoes button {
-  border: none;
-  padding: 8px 12px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-  margin-right: 8px;
+
+.acoes {
+  margin-top: 10px;
 }
 
 button {
-  background: #ffc107;
-}
-
-button.pronto {
   background: #28a745;
+  border: none;
+  padding: 8px 12px;
+  margin-right: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
-button.voltar {
-  background: #ff4444;
-  color: #fff;
+button:last-child {
+  background: #007bff;
 }
 
 button:hover {
-  opacity: 0.85;
+  opacity: 0.8;
 }
+

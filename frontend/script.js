@@ -3,17 +3,6 @@ let carrinho = [];
 /* URL REAL DO BACKEND NO RENDER */
 const API_URL = 'https://restaurante-backend-tnnb.onrender.com';
 
-/* Botão: Conferir status do pedido */
-function conferirPedido() {
-  const codigo = prompt('Digite o código do pedido:');
-  if (!codigo) return;
-
-  // 🔴 IMPORTANTE: redireciona para o ARQUIVO HTML
-  window.location.href = `/cliente/?codigo=${codigo}`;
-
-}
-
-/* Adicionar item ao carrinho */
 function adicionar(produto) {
   const item = carrinho.find(i => i.produto === produto);
 
@@ -26,7 +15,6 @@ function adicionar(produto) {
   renderCarrinho();
 }
 
-/* Renderizar carrinho */
 function renderCarrinho() {
   const ul = document.getElementById('carrinho');
   ul.innerHTML = '';
@@ -38,7 +26,6 @@ function renderCarrinho() {
   });
 }
 
-/* Enviar pedido */
 async function enviarPedido() {
   const nomeCliente = document.getElementById('nomeCliente').value;
 
@@ -50,7 +37,9 @@ async function enviarPedido() {
   try {
     const resposta = await fetch(`${API_URL}/pedido`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
         nome_cliente: nomeCliente,
         itens: carrinho
@@ -63,9 +52,7 @@ async function enviarPedido() {
       throw new Error(dados.erro || 'Erro ao enviar pedido');
     }
 
-    // 🔴 IMPORTANTE: redireciona para o ARQUIVO HTML
     window.location.href = `/cliente/?id=${dados.pedido_id}`;
-
 
   } catch (error) {
     alert('Erro ao enviar pedido');

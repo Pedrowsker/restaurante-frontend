@@ -1,50 +1,41 @@
 const API_URL = 'https://restaurante-backend-tnnb.onrender.com';
-
-const ativosDiv = document.getElementById('pedidos-ativos');
-const historicoDiv = document.getElementById('pedidos-historico');
+const pedidosDiv = document.getElementById('pedidos');
 
 async function carregarPedidos() {
   try {
     const response = await fetch(`${API_URL}/pedidos`);
     const pedidos = await response.json();
 
-    ativosDiv.innerHTML = '';
-    historicoDiv.innerHTML = '';
+    pedidosDiv.innerHTML = '';
 
-    pedidos.forEach(pedido => {
-      const pedidoDiv = document.createElement('div');
-      pedidoDiv.className = 'pedido';
+    pedidos
+      .filter(pedido => pedido.status !== 'Pronto')
+      .forEach(pedido => {
 
-      let html = `
-        <h3>Cliente: ${pedido.nome_cliente}</h3>
-        <p>Status: <strong>${pedido.status}</strong></p>
-        <div class="itens">
-      `;
+        const pedidoDiv = document.createElement('div');
+        pedidoDiv.className = 'pedido';
 
-      pedido.itens.forEach(item => {
-        html += `<div class="item">• ${item.quantidade}x ${item.produto}</div>`;
+        let html = `
+          <h2>Cliente: ${pedido.nome_cliente}</h2>
+          <p>Status: <strong>${pedido.status}</strong></p>
+          <div class="itens">
+        `;
+
+        pedido.itens.forEach(item => {
+          html += `<div class="item">• ${item.quantidade}x ${item.produto}</div>`;
+        });
+
+        html += `
+          </div>
+          <div class="acoes">
+            <button onclick="alterarStatus(${pedido.id}, 'Em preparo')">Em preparo</button>
+            <button onclick="alterarStatus(${pedido.id}, 'Pronto')">Pronto</button>
+          </div>
+        `;
+
+        pedidoDiv.innerHTML = html;
+        pedidosDiv.appendChild(pedidoDiv);
       });
-
-      html += `</div><div class="acoes">`;
-
-      if (pedido.status === 'Pronto') {
-        html += `
-          <button class="voltar" onclick="alterarStatus(${pedido.id}, 'Em preparo')">
-            Voltar para preparo
-          </button>
-        `;
-        pedidoDiv.classList.add('pronto');
-        pedidoDiv.innerHTML = html + `</div>`;
-        historicoDiv.appendChild(pedidoDiv);
-      } else {
-        html += `
-          <button onclick="alterarStatus(${pedido.id}, 'Em preparo')">Em preparo</button>
-          <button class="pronto" onclick="alterarStatus(${pedido.id}, 'Pronto')">Pronto</button>
-        `;
-        pedidoDiv.innerHTML = html + `</div>`;
-        ativosDiv.appendChild(pedidoDiv);
-      }
-    });
 
   } catch (error) {
     console.error('Erro ao carregar pedidos:', error);
@@ -52,13 +43,24 @@ async function carregarPedidos() {
 }
 
 async function alterarStatus(id, status) {
-  await fetch(`${API_URL}/pedido/${id}/status`, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ status })
-  });
+  try {
+    const response = await fetch(`${API_URL}/pedido/${id}/status`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ status })
+    });
 
-  carregarPedidos();
+    if (!response.ok) {
+      throw new Error('Erro ao atualizar status');
+    }
+
+    carregarPedidos();
+
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 carregarPedidos();
